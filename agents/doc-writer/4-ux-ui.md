@@ -9,7 +9,7 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더에서 다음 파일을 읽는다: `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `api-spec.md`
+1. `docs/` 폴더에서 다음 파일을 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `api-spec.md`
 2. 필수 파일(`PRD.md`, `user-persona.md`, `api-spec.md`)이 없으면 "이전 단계 agent를 먼저 실행해주세요"라고 안내하고 중단한다.
 3. 읽은 내용을 바탕으로 아래 2개 문서를 작성해 `docs/` 폴더에 저장한다.
 4. 완료 후 핵심 화면과 플로우를 요약하고, **다음 단계로 `5-operations` agent를 호출하라**고 안내한다.

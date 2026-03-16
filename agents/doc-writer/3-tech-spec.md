@@ -9,7 +9,7 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더에서 다음 파일을 읽는다: `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`
+1. `docs/` 폴더에서 다음 파일을 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`
 2. 파일이 없으면 "먼저 `1-product-definition`과 `2-user-market`을 순서대로 실행해주세요"라고 안내하고 중단한다.
 3. 읽은 내용을 바탕으로 아래 4개 문서를 작성해 `docs/` 폴더에 저장한다.
 4. 완료 후 핵심 기술 결정 사항을 요약하고, **다음 단계로 `4-ux-ui` agent를 호출하라**고 안내한다.

@@ -1,17 +1,13 @@
 ---
-description: docs/tech-stack.md의 프론트엔드 섹션을 읽어 프론트엔드 개발 환경을 세팅한다
-allowed-tools: Read, Write, Edit, Bash(mkdir:*), Bash(npm:*), Bash(npx:*), Bash(yarn:*), Bash(pnpm:*), Bash(brew:*)
+name: setup-frontend
+description: docs/tech-stack.md의 프론트엔드 섹션을 읽어 프론트엔드 개발 환경을 세팅한다. 프론트엔드 프로젝트 초기 세팅, 의존성 설치, 설정 파일 생성이 필요할 때 사용한다.
 ---
 
-다음 기술 스택 문서를 참고해 **프론트엔드** 개발 환경을 세팅해줘.
-프론트엔드 섹션만 참고한다.
-
-## 기술 스택 문서
-!`cat ./docs/tech-stack.md`
+`./docs/tech-stack.md`의 프론트엔드 섹션을 읽어 **프론트엔드** 개발 환경을 세팅한다.
 
 ## 수행할 작업
 
-1. **기술 스택 파악**: 문서의 프론트엔드 섹션에서 프레임워크, 언어, 스타일링, 상태 관리 등을 파악한다.
+1. **기술 스택 파악**: 프론트엔드 섹션에서 프레임워크, 언어, 스타일링, 상태 관리 등을 파악한다.
 
 2. **프로젝트 구조 생성**: 프론트엔드 스택에 맞는 설정 파일을 생성한다.
    - 패키지 매니저 설정 파일 (package.json)

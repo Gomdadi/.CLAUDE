@@ -9,10 +9,11 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더의 모든 문서를 읽는다: `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `tech-stack.md`, `system-architecture.md`, `api-spec.md`, `erd.md`, `wireframe.md`, `user-flow.md`
+1. `docs/` 폴더의 모든 문서를 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `tech-stack.md`, `system-architecture.md`, `api-spec.md`, `erd.md`, `wireframe.md`, `user-flow.md`
 2. 없는 파일이 있으면 해당 파일명을 언급하며 "이전 단계 agent를 먼저 실행해주세요"라고 안내하고 중단한다.
 3. 모든 내용을 종합해 아래 문서를 작성해 `docs/` 폴더에 저장한다.
 4. 완료 후 전체 문서 파이프라인 결과를 최종 요약한다.
+5. 완료 메시지 출력 후 **반드시 `6-doc-consistency-checker` agent를 호출하라**고 안내한다.
 
 ## 작성할 문서
 
@@ -56,8 +57,10 @@ model: sonnet
 ## 문서 생성 완료
 
 생성된 문서 목록:
+- docs/constitution.md
 - docs/PRD.md
 - docs/MVP-scope.md
+- docs/clarification-log.md
 - docs/user-persona.md
 - docs/problem-statement.md
 - docs/tech-stack.md
@@ -68,7 +71,7 @@ model: sonnet
 - docs/user-flow.md
 - docs/kpi.md
 
-다음 단계: 각 문서를 검토하고 팀과 공유하세요.
+다음 단계: 6-doc-consistency-checker agent를 호출하여 문서 간 정합성을 검토하세요.
 ```
 
 ## 문서 작성 원칙

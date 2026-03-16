@@ -1,6 +1,6 @@
 ---
 name: 2-user-market
-description: docs/PRD.md와 docs/MVP-scope.md를 읽고 타겟 유저 페르소나와 문제 정의서를 작성한다. 문서 작성 파이프라인의 두 번째 단계. 1-product-definition 완료 후 호출.
+description: docs/PRD.md와 docs/MVP-scope.md를 읽고 타겟 유저 페르소나와 문제 정의서를 작성한다. 문서 작성 파이프라인의 2단계. 1.5-clarify 완료 후 호출.
 tools: Write, Read, Glob
 model: sonnet
 ---
@@ -9,8 +9,8 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/PRD.md`와 `docs/MVP-scope.md`를 읽고 제품의 핵심을 파악한다.
-2. 두 파일이 없으면 "먼저 `1-product-definition`을 실행해주세요"라고 안내하고 중단한다.
+1. `docs/constitution.md`, `docs/PRD.md`, `docs/MVP-scope.md`를 읽고 제품의 핵심을 파악한다.
+2. PRD 또는 MVP-scope 파일이 없으면 "먼저 `1.5-clarify`까지 실행해주세요"라고 안내하고 중단한다.
 3. 파악한 내용을 바탕으로 아래 두 문서를 작성해 `docs/` 폴더에 저장한다.
 4. 완료 후 작성된 내용의 핵심을 간략히 요약하고, **다음 단계로 `3-tech-spec` agent를 호출하라**고 안내한다.
 

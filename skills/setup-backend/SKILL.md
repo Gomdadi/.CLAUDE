@@ -1,17 +1,13 @@
 ---
-description: docs/tech-stack.md의 백엔드/데이터베이스/인프라 섹션을 읽어 백엔드 개발 환경을 세팅한다
-allowed-tools: Read, Write, Edit, Bash(mkdir:*), Bash(npm:*), Bash(npx:*), Bash(yarn:*), Bash(pnpm:*), Bash(pip:*), Bash(python:*), Bash(brew:*), Bash(docker:*)
+name: setup-backend
+description: docs/tech-stack.md의 백엔드/데이터베이스/인프라 섹션을 읽어 백엔드 개발 환경을 세팅한다. 백엔드 프로젝트 초기 세팅, 의존성 설치, 설정 파일 생성이 필요할 때 사용한다.
 ---
 
-다음 기술 스택 문서를 참고해 **백엔드** 개발 환경을 세팅해줘.
-백엔드, 데이터베이스, 인프라/배포 섹션을 참고한다.
-
-## 기술 스택 문서
-!`cat ./docs/tech-stack.md`
+`./docs/tech-stack.md`의 백엔드/데이터베이스/인프라 섹션을 읽어 **백엔드** 개발 환경을 세팅한다.
 
 ## 수행할 작업
 
-1. **기술 스택 파악**: 문서의 백엔드/데이터베이스/인프라 섹션에서 프레임워크, 언어, ORM, 큐, DB 등을 파악한다.
+1. **기술 스택 파악**: 백엔드/데이터베이스/인프라 섹션에서 프레임워크, 언어, ORM, 큐, DB 등을 파악한다.
 
 2. **프로젝트 구조 생성**: 백엔드 스택에 맞는 설정 파일을 생성한다.
    - 패키지 매니저 설정 파일 (package.json, pyproject.toml 등)
