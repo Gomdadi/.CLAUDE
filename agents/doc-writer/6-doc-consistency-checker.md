@@ -12,13 +12,39 @@ model: sonnet
 ## 호출 시 즉시 수행할 작업
 
 1. `docs/` 폴더의 모든 문서를 빠짐없이 읽는다 (`consistency-report.md` 제외).
-2. `docs/consistency-report.md`가 존재하면 읽어 이전 회차 내용을 파악한다.
-3. 아래 정의된 **10개 체크포인트**를 순서대로 검토한다.
-4. 검토 결과를 `docs/consistency-report.md`에 저장한다.
+2. `docs/consistency-report.md`가 존재하면 읽어 이전 회차 내용을 파악한다. **현재 회차 번호를 확인한다.**
+3. **회차가 4 이상이면** 아래 **루프 중단 절차**를 수행한다.
+4. 아래 정의된 **13개 체크포인트**를 순서대로 검토한다.
+5. 검토 결과를 `docs/consistency-report.md`에 저장한다.
    - 첫 실행: 파일을 새로 생성한다.
    - 재실행: 기존 파일 맨 아래에 새 회차 섹션을 추가한다.
-5. 이슈가 남아 있으면 **`7-doc-consistency-fixer` agent를 호출하라**고 안내한다.
-6. 이슈가 0건이면 "모든 정합성 이슈가 해결되었습니다"를 출력하고, **다음 단계로 `8-task-breakdown` agent를 호출하라**고 안내한다.
+6. 이슈가 남아 있으면 **`7-doc-consistency-fixer` agent를 호출하라**고 안내한다.
+7. 이슈가 0건이면 "모든 정합성 이슈가 해결되었습니다"를 출력하고, **다음 단계로 `8-task-breakdown` agent를 호출하라**고 안내한다.
+
+### 루프 중단 절차 (회차 4 이상)
+
+3회차까지 수정을 반복해도 이슈가 남아 있다면, 자동 수정으로는 해결이 어려운 구조적 문제일 가능성이 높다. 이 경우:
+
+1. 13개 체크포인트를 정상적으로 검토하고 결과를 `consistency-report.md`에 저장한다.
+2. 잔여 이슈 목록을 사용자에게 보고하며 아래 내용을 출력한다:
+
+```
+## 정합성 검토 루프 중단 (회차 N)
+
+3회 반복 수정 후에도 아래 이슈가 해결되지 않았습니다.
+자동 수정이 어려운 항목이므로 사용자 판단이 필요합니다.
+
+### 미해결 이슈
+- [이슈 ID]: [이슈 요약] (최초 발견: 회차 N)
+- ...
+
+### 선택지
+1. 이슈를 직접 수정한 뒤 `6-doc-consistency-checker`를 다시 호출
+2. 잔여 이슈를 인지한 상태로 `8-task-breakdown`으로 진행
+3. 특정 이슈에 대해 수정 방향을 지시
+```
+
+3. `7-doc-consistency-fixer` 호출을 안내하지 **않는다**. 사용자의 선택을 기다린다.
 
 ---
 
@@ -29,10 +55,10 @@ doc-writer 파이프라인이 생성하는 표준 문서 목록:
 | 단계 | 파일 |
 |------|------|
 | 1단계 | `docs/PRD.md`, `docs/MVP-scope.md` |
-| 2단계 | `docs/user-persona.md`, `docs/problem-statement.md` |
+| 2단계 | `docs/user-persona.md`, `docs/problem-statement.md`, `docs/competitive-analysis.md` |
 | 3단계 | `docs/tech-stack.md`, `docs/system-architecture.md`, `docs/api-spec.md`, `docs/erd.md` |
 | 4단계 | `docs/wireframe.md`, `docs/user-flow.md` |
-| 5단계 | `docs/kpi.md` |
+| 5단계 | `docs/kpi.md`, `docs/operations-guide.md` |
 
 존재하지 않는 파일은 체크포인트 검토 시 해당 항목을 건너뛰고 "파일 없음"으로 표시한다.
 
@@ -119,6 +145,33 @@ doc-writer 파이프라인이 생성하는 표준 문서 목록:
 - MVP-scope 출시 전제 조건(P1, P2, ...)이 KPI 또는 KPI 측정 계획에서 체크 대상으로 포함되어 있는지 확인한다.
 - KPI에 정의된 측정 기간(주간, 월간 등)이 MVP-scope에서 설정한 런치 타임라인과 충돌하지 않는지 확인한다.
 
+### CP-11. operations-guide ↔ system-architecture/tech-stack 운영 일치
+
+검토 항목:
+- operations-guide의 장애 대응 시나리오가 system-architecture의 모든 핵심 컴포넌트를 빠짐없이 다루고 있는지 확인한다.
+- operations-guide의 환경 변수 목록이 system-architecture와 tech-stack에서 도출 가능한 설정값을 누락 없이 포함하는지 확인한다.
+- operations-guide의 배포 절차가 tech-stack의 CI/CD 구성 및 constitution의 인프라/배포 원칙과 일치하는지 확인한다.
+- operations-guide의 모니터링 알림 임계값이 PRD 성능 목표 수치 및 KPI 목표 수치와 모순되지 않는지 확인한다.
+
+### CP-12. operations-guide ↔ KPI 측정-모니터링 연결
+
+검토 항목:
+- KPI 측정 계획에서 정의한 측정 도구(GA4, Mixpanel 등)가 operations-guide 모니터링 섹션에도 반영되어 있는지 확인한다.
+- KPI의 실패 신호/Kill 기준에 해당하는 메트릭이 operations-guide 알림 기준에 포함되어 있는지 확인한다.
+- operations-guide의 백업 정책이 ERD의 데이터 모델과 일치하는지 확인한다 (백업 대상 테이블 누락 여부).
+
+### CP-13. constitution 보안 원칙 ↔ API spec/ERD/system-architecture 준수
+
+`constitution.md`의 보안 원칙(C-SEC-* ID)이 하위 설계 문서에 실제로 반영되었는지 검증한다.
+
+검토 항목:
+- constitution의 인증/인가 원칙이 API spec에 반영되어 있는지 확인한다. 인증이 필요한 엔드포인트에 인증 헤더(Authorization 등)가 명시되어 있는지, 공개 엔드포인트가 명확히 구분되어 있는지 확인한다.
+- constitution의 민감 데이터 처리 원칙(암호화, 보존 기간, 접근 제한)이 ERD에 반영되어 있는지 확인한다. 비밀번호, 토큰, 개인정보 등 민감 컬럼에 암호화 대상 표시 또는 처리 방침이 명시되어 있는지 확인한다.
+- constitution의 외부 입력 검증 원칙(서버 측 유효성 검사 필수 등)이 API spec의 Request 파라미터 검증 규칙에 반영되어 있는지 확인한다.
+- constitution의 비밀 정보 관리 원칙(환경 변수, vault 등)이 system-architecture 보안 섹션 및 operations-guide 환경 변수 목록과 일치하는지 확인한다.
+- API spec에서 민감 데이터를 반환하는 엔드포인트(사용자 정보 조회 등)에 응답 필드 마스킹/필터링 기준이 명시되어 있는지 확인한다.
+- system-architecture의 보안 고려사항 섹션이 constitution의 보안 원칙 ID를 빠짐없이 참조하고 있는지 확인한다.
+
 ---
 
 ## 이슈 분류 기준
@@ -152,7 +205,7 @@ doc-writer 파이프라인이 생성하는 표준 문서 목록:
   - 영향 범위: [구현 시 어떤 문제가 발생할 수 있는지]
   - 권장 조치: [어느 문서를 어떻게 수정해야 하는지]
 
-... (CP-2 ~ CP-10)
+... (CP-2 ~ CP-13)
 
 ---
 
@@ -170,6 +223,9 @@ doc-writer 파이프라인이 생성하는 표준 문서 목록:
 | CP-8. wireframe ↔ user-flow | ... | N |
 | CP-9. user-persona ↔ user-flow | ... | N |
 | CP-10. PRD/MVP-scope ↔ KPI | ... | N |
+| CP-11. operations-guide ↔ system-architecture/tech-stack | ... | N |
+| CP-12. operations-guide ↔ KPI | ... | N |
+| CP-13. constitution 보안 원칙 ↔ API spec/ERD/architecture | ... | N |
 
 **총 이슈**: N건 (불일치 N / 누락 N / 모순 N)
 

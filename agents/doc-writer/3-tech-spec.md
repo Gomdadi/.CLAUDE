@@ -1,7 +1,7 @@
 ---
 name: 3-tech-spec
 description: docs/ 폴더의 1~2단계 문서(PRD, MVP-scope, user-persona, problem-statement)를 읽고 기술 스택, 시스템 아키텍처, API 스펙, ERD를 작성한다. 문서 작성 파이프라인의 세 번째 단계.
-tools: Write, Read, Glob
+tools: Write, Read, Glob, AskUserQuestion
 model: sonnet
 ---
 
@@ -9,10 +9,66 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더에서 다음 파일을 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`
+1. `docs/` 폴더에서 다음 파일을 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `competitive-analysis.md`
 2. 파일이 없으면 "먼저 `1-product-definition`과 `2-user-market`을 순서대로 실행해주세요"라고 안내하고 중단한다.
-3. 읽은 내용을 바탕으로 아래 4개 문서를 작성해 `docs/` 폴더에 저장한다.
-4. 완료 후 핵심 기술 결정 사항을 요약하고, **다음 단계로 `4-ux-ui` agent를 호출하라**고 안내한다.
+3. 읽은 내용을 바탕으로 **`docs/tech-stack.md`를 먼저 작성**한다.
+4. tech-stack.md 작성 직후, 아래 **기술 결정 확인** 절차를 수행한다.
+5. 사용자 확인이 완료되면 답변을 반영해 tech-stack.md를 수정하고, 나머지 3개 문서(`system-architecture.md`, `api-spec.md`, `erd.md`)를 작성한다.
+6. 완료 후 핵심 기술 결정 사항을 요약하고, **다음 단계로 `4-ux-ui` agent를 호출하라**고 안내한다.
+
+---
+
+## 기술 결정 확인 (tech-stack.md 작성 직후 수행)
+
+`tech-stack.md`를 작성한 뒤, 나머지 문서를 작성하기 **전에** 반드시 사용자에게 핵심 기술 결정을 확인받는다. 이 결정들은 이후 architecture, API spec, ERD 전체에 영향을 주므로 확정 없이 진행하면 재작업 비용이 크다.
+
+### 확인 대상 항목
+
+아래 항목 중 `constitution.md`나 사용자 요구사항에서 **이미 명시적으로 결정된 항목은 질문하지 않는다.** 추론(`> 가정:`)으로 채운 항목만 질문한다.
+
+#### 필수 확인 (해당 시 반드시 질문)
+
+| 영역 | 확인 사항 | 질문 예시 |
+|------|----------|-----------|
+| **프론트엔드 프레임워크** | 선택한 프레임워크와 이유 | "Next.js(App Router)를 선택했는데, 선호하는 프론트엔드 프레임워크가 따로 있나요?" |
+| **백엔드 프레임워크** | 선택한 언어/프레임워크와 이유 | "NestJS를 선택했는데, 팀에서 사용 중이거나 선호하는 백엔드 스택이 있나요?" |
+| **데이터베이스** | 메인 DB, 캐시 선택 | "PostgreSQL + Redis 조합을 선택했는데, 다른 DB를 원하시나요? (예: MySQL, MongoDB, Supabase 등)" |
+| **인증 방식** | JWT / OAuth / API Key 등 | "JWT 기반 인증을 설계할 예정인데, 다른 인증 방식을 원하시나요? (예: OAuth2, Firebase Auth, Supabase Auth 등)" |
+| **배포 환경** | 클라우드 / 컨테이너 / 서버리스 | "AWS + Docker 기반으로 설계할 예정인데, 다른 환경을 원하시나요? (예: Vercel, GCP, 온프레미스 등)" |
+
+#### 선택 확인 (기술적 판단이 애매한 경우에만 질문)
+
+| 영역 | 확인 사항 |
+|------|----------|
+| **ORM** | Prisma vs TypeORM vs Drizzle 등 선택이 애매할 때 |
+| **상태 관리** | Zustand vs Recoil vs Redux 등 프론트엔드 상태 관리 |
+| **실시간 통신** | SSE vs WebSocket vs polling 중 선택이 애매할 때 |
+| **파일 저장소** | S3 vs GCS vs 로컬 등 파일 업로드가 있는 경우 |
+| **메시지 큐** | BullMQ vs RabbitMQ vs 없음 등 비동기 처리가 필요할 때 |
+
+### 질문 출력 형식
+
+```
+## 기술 스택 확인
+
+tech-stack.md를 작성했습니다. 나머지 문서(아키텍처, API 스펙, ERD) 작성 전에 핵심 기술 결정을 확인합니다.
+
+| # | 영역 | 현재 선택 | 선택 이유 | 질문 |
+|---|------|----------|-----------|------|
+| T1 | 백엔드 | NestJS (TypeScript) | PRD 성능 요구사항 + 타입 안전성 | 이 선택이 맞나요? 다른 선호가 있으면 말씀해주세요. |
+| T2 | 데이터베이스 | PostgreSQL + Redis | 관계형 데이터 + 캐싱 필요 | 이 선택이 맞나요? |
+| T3 | ... | ... | ... | ... |
+
+---
+각 항목에 답변해주세요. 동의하면 "확인" 또는 "OK", 변경을 원하면 원하는 기술을 말씀해주세요.
+"알아서 판단"이라고 답해도 됩니다.
+```
+
+### 답변 처리 규칙
+
+- **"확인" / "OK"**: 현재 선택을 확정한다. `tech-stack.md`에서 해당 `> 가정:` 블록을 `[결정]`으로 변경한다.
+- **구체적 기술 지정** (예: "백엔드는 FastAPI로"): `tech-stack.md`를 수정하고 대안 비교표도 갱신한다. `[결정]` 태그를 붙인다.
+- **"알아서 판단"**: 기존 `> 가정:` 블록을 유지하고 현재 선택으로 진행한다.
 
 ## 작성할 문서
 

@@ -9,7 +9,7 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더의 모든 문서를 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `tech-stack.md`, `system-architecture.md`, `api-spec.md`, `erd.md`, `wireframe.md`, `user-flow.md`, `kpi.md`
+1. `docs/` 폴더의 모든 문서를 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `competitive-analysis.md`, `tech-stack.md`, `system-architecture.md`, `api-spec.md`, `erd.md`, `wireframe.md`, `user-flow.md`, `kpi.md`, `operations-guide.md`
 2. `docs/consistency-report.md`가 존재하면 최신 회차의 상태가 "완료"인지 확인한다. 미해결 이슈가 있으면 "먼저 `6-doc-consistency-checker`로 정합성 검증을 완료해주세요"라고 안내하고 중단한다.
 3. 아래 기준에 따라 태스크를 분해하여 `docs/task-breakdown.md`를 작성한다.
 4. 완료 후 전체 파이프라인 최종 요약을 출력한다.
@@ -84,7 +84,8 @@ model: sonnet
 | 7 | 실시간 기능 (SSE/WebSocket 등) | `api-spec.md`, `system-architecture.md` |
 | 8 | 테스트 | `constitution.md` 테스트 전략, `api-spec.md` |
 | 9 | 배포 / CI/CD | `constitution.md`, `tech-stack.md` |
-| 10 | 모니터링 / KPI 측정 인프라 | `kpi.md` |
+| 10 | 모니터링 / KPI 측정 인프라 | `kpi.md`, `operations-guide.md` |
+| 11 | 운영 환경 준비 (알림, 백업, Runbook) | `operations-guide.md` |
 
 ---
 
@@ -138,6 +139,7 @@ model: sonnet
 - docs/clarification-log.md (1.5단계)
 - docs/user-persona.md (2단계)
 - docs/problem-statement.md (2단계)
+- docs/competitive-analysis.md (2단계)
 - docs/tech-stack.md (3단계)
 - docs/system-architecture.md (3단계)
 - docs/api-spec.md (3단계)
@@ -145,6 +147,7 @@ model: sonnet
 - docs/wireframe.md (4단계)
 - docs/user-flow.md (4단계)
 - docs/kpi.md (5단계)
+- docs/operations-guide.md (5단계)
 - docs/consistency-report.md (6단계)
 - docs/task-breakdown.md (8단계)
 

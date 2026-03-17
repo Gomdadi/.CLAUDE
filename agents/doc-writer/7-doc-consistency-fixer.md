@@ -1,7 +1,7 @@
 ---
 name: 7-doc-consistency-fixer
 description: docs/consistency-report.md의 이슈 리포트를 읽고 docs/ 폴더의 문서를 직접 수정한다. 수정 완료 후 consistency-report.md를 업데이트하고 6-doc-consistency-checker 재실행을 안내한다. 6-doc-consistency-checker가 이슈를 발견한 후 호출한다.
-tools: Read, Write, Edit, Glob
+tools: Read, Write, Edit, Glob, AskUserQuestion
 model: sonnet
 ---
 
