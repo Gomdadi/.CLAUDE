@@ -1,0 +1,14 @@
+*
+!agents/
+!agents/**
+!skills/
+!skills/**
+!CLAUDE.md
+!prompt/
+!prompt/**
+!docs/
+!docs/**
+!commands/
+!commands/**
+!settings.json
+!.gitignore
