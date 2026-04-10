@@ -9,9 +9,9 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더에서 다음 파일을 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `competitive-analysis.md`
+1. 다음 파일을 읽는다: `docs/00/constitution.md`, `docs/01/PRD.md`, `docs/01/MVP-scope.md`, `docs/02/user-persona.md`, `docs/02/problem-statement.md`, `docs/02/competitive-analysis.md`
 2. 파일이 없으면 "먼저 `1-product-definition`과 `2-user-market`을 순서대로 실행해주세요"라고 안내하고 중단한다.
-3. 읽은 내용을 바탕으로 **`docs/tech-stack.md`를 먼저 작성**한다.
+3. 읽은 내용을 바탕으로 **`docs/03/tech-stack.md`를 먼저 작성**한다.
 4. tech-stack.md 작성 직후, 아래 **기술 결정 확인** 절차를 수행한다.
 5. 사용자 확인이 완료되면 답변을 반영해 tech-stack.md를 수정하고, 나머지 3개 문서(`system-architecture.md`, `api-spec.md`, `erd.md`)를 작성한다.
 6. 완료 후 핵심 기술 결정 사항을 요약하고, **다음 단계로 `4-ux-ui` agent를 호출하라**고 안내한다.
@@ -20,7 +20,7 @@ model: sonnet
 
 ## 기술 결정 확인 (tech-stack.md 작성 직후 수행)
 
-`tech-stack.md`를 작성한 뒤, 나머지 문서를 작성하기 **전에** 반드시 사용자에게 핵심 기술 결정을 확인받는다. 이 결정들은 이후 architecture, API spec, ERD 전체에 영향을 주므로 확정 없이 진행하면 재작업 비용이 크다.
+`docs/03/tech-stack.md`를 작성한 뒤, 나머지 문서를 작성하기 **전에** 반드시 사용자에게 핵심 기술 결정을 확인받는다. 이 결정들은 이후 architecture, API spec, ERD 전체에 영향을 주므로 확정 없이 진행하면 재작업 비용이 크다.
 
 ### 확인 대상 항목
 
@@ -66,13 +66,13 @@ tech-stack.md를 작성했습니다. 나머지 문서(아키텍처, API 스펙, 
 
 ### 답변 처리 규칙
 
-- **"확인" / "OK"**: 현재 선택을 확정한다. `tech-stack.md`에서 해당 `> 가정:` 블록을 `[결정]`으로 변경한다.
-- **구체적 기술 지정** (예: "백엔드는 FastAPI로"): `tech-stack.md`를 수정하고 대안 비교표도 갱신한다. `[결정]` 태그를 붙인다.
+- **"확인" / "OK"**: 현재 선택을 확정한다. `docs/03/tech-stack.md`에서 해당 `> 가정:` 블록을 `[결정]`으로 변경한다.
+- **구체적 기술 지정** (예: "백엔드는 FastAPI로"): `docs/03/tech-stack.md`를 수정하고 대안 비교표도 갱신한다. `[결정]` 태그를 붙인다.
 - **"알아서 판단"**: 기존 `> 가정:` 블록을 유지하고 현재 선택으로 진행한다.
 
 ## 작성할 문서
 
-### `docs/tech-stack.md` — 기술 스택 결정서
+### `docs/03/tech-stack.md` — 기술 스택 결정서
 
 PRD의 비기능 요구사항과 MVP 범위를 고려해 작성한다.
 
@@ -83,7 +83,7 @@ PRD의 비기능 요구사항과 MVP 범위를 고려해 작성한다.
 - **인프라 / 배포**: 클라우드, 컨테이너, CI/CD, 선택 이유
 - **대안 비교표**: 각 레이어별 후보군과 선택하지 않은 이유
 
-### `docs/system-architecture.md` — 시스템 아키텍처
+### `docs/03/system-architecture.md` — 시스템 아키텍처
 
 포함할 내용:
 - **컴포넌트 목록**: 각 컴포넌트의 역할과 책임
@@ -93,7 +93,7 @@ PRD의 비기능 요구사항과 MVP 범위를 고려해 작성한다.
 - **데이터 흐름**: 핵심 시나리오별 데이터 이동 경로
 - **보안 고려사항**: 인증/인가 방식, 민감 데이터 처리
 
-### `docs/api-spec.md` — API 스펙
+### `docs/03/api-spec.md` — API 스펙
 
 PRD의 핵심 기능(Must-have)을 기준으로 필요한 엔드포인트를 설계한다.
 
@@ -107,7 +107,7 @@ PRD의 핵심 기능(Must-have)을 기준으로 필요한 엔드포인트를 설
   - Response (성공 JSON 예시, HTTP 상태 코드)
 - **공통 에러 코드 정의** (400, 401, 403, 404, 500 등)
 
-### `docs/erd.md` — ERD
+### `docs/03/erd.md` — ERD
 
 API 스펙과 핵심 기능을 바탕으로 데이터 모델을 설계한다.
 
@@ -125,4 +125,4 @@ API 스펙과 핵심 기능을 바탕으로 데이터 모델을 설계한다.
 - MVP 범위에 포함된 기능만을 기준으로 설계한다. Out-of-scope 기능은 설계하지 않는다.
 - Mermaid 다이어그램을 적극 활용한다.
 - 추론한 내용은 반드시 `> 가정:` 블록으로 표시한다.
-- 앞 단계 문서(`→ docs/PRD.md 참고` 형식)를 상호 참조한다.
+- 앞 단계 문서(`→ docs/01/PRD.md 참고` 형식)를 상호 참조한다.

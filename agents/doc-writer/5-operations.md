@@ -9,17 +9,17 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더의 모든 문서를 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `competitive-analysis.md`, `tech-stack.md`, `system-architecture.md`, `api-spec.md`, `erd.md`, `wireframe.md`, `user-flow.md`
+1. 다음 파일을 읽는다: `docs/00/constitution.md`, `docs/01/PRD.md`, `docs/01/MVP-scope.md`, `docs/02/user-persona.md`, `docs/02/problem-statement.md`, `docs/02/competitive-analysis.md`, `docs/03/tech-stack.md`, `docs/03/system-architecture.md`, `docs/03/api-spec.md`, `docs/03/erd.md`, `docs/04/wireframe.md`, `docs/04/user-flow.md`
 2. 없는 파일이 있으면 해당 파일명을 언급하며 "이전 단계 agent를 먼저 실행해주세요"라고 안내하고 중단한다.
-3. 모든 내용을 종합해 아래 **2개 문서**를 작성해 `docs/` 폴더에 저장한다.
+3. 모든 내용을 종합해 아래 **2개 문서**를 작성해 `docs/05/` 폴더에 저장한다.
 4. 완료 후 전체 문서 파이프라인 결과를 최종 요약한다.
 5. 완료 메시지 출력 후 **반드시 `6-doc-consistency-checker` agent를 호출하라**고 안내한다.
 
 ## 작성할 문서
 
-### `docs/kpi.md` — 성공 지표 및 KPI
+### `docs/05/kpi.md` — 성공 지표 및 KPI
 
-`problem-statement.md`의 기대 효과, `PRD.md`의 핵심 기능, `user-persona.md`의 페르소나 목표를 종합해 작성한다.
+`docs/02/problem-statement.md`의 기대 효과, `docs/01/PRD.md`의 핵심 기능, `docs/02/user-persona.md`의 페르소나 목표를 종합해 작성한다.
 
 포함할 내용:
 
@@ -51,9 +51,9 @@ model: sonnet
 
 ---
 
-### `docs/operations-guide.md` — 운영 가이드
+### `docs/05/operations-guide.md` — 운영 가이드
 
-`system-architecture.md`의 컴포넌트 구조, `tech-stack.md`의 인프라 구성, `api-spec.md`의 엔드포인트 목록, `kpi.md`의 측정 계획을 기반으로 작성한다.
+`docs/03/system-architecture.md`의 컴포넌트 구조, `docs/03/tech-stack.md`의 인프라 구성, `docs/03/api-spec.md`의 엔드포인트 목록, `docs/05/kpi.md`의 측정 계획을 기반으로 작성한다.
 
 포함할 내용:
 
@@ -71,7 +71,7 @@ model: sonnet
 
 #### 장애 대응 절차 (Runbook)
 
-`system-architecture.md`의 컴포넌트별로 장애 시나리오를 정의한다.
+`docs/03/system-architecture.md`의 컴포넌트별로 장애 시나리오를 정의한다.
 
 각 시나리오에 포함할 내용:
 - **증상**: 어떤 알림/로그로 인지하는지
@@ -89,7 +89,7 @@ model: sonnet
 
 #### 환경 변수 및 시크릿 목록
 
-`tech-stack.md`와 `system-architecture.md`에서 도출한다.
+`docs/03/tech-stack.md`와 `docs/03/system-architecture.md`에서 도출한다.
 
 | 변수명 | 설명 | 필수 여부 | 예시 값 | 관리 방식 |
 |--------|------|----------|---------|-----------|
@@ -101,7 +101,7 @@ model: sonnet
 
 #### 백업 및 복구 정책
 
-`erd.md`의 데이터 모델을 기반으로 작성한다.
+`docs/03/erd.md`의 데이터 모델을 기반으로 작성한다.
 
 - **백업 대상**: 어떤 데이터를 백업하는지 (DB, 파일 저장소, 설정 등)
 - **백업 주기**: 일간 / 주간 / 실시간 복제
@@ -111,7 +111,7 @@ model: sonnet
 
 #### 배포 절차
 
-`tech-stack.md`의 CI/CD 구성을 기반으로 작성한다.
+`docs/03/tech-stack.md`의 CI/CD 구성을 기반으로 작성한다.
 
 - **배포 환경**: 개발 / 스테이징 / 프로덕션 각각의 용도와 접근 방식
 - **배포 프로세스**: PR 머지 → 빌드 → 테스트 → 배포 단계별 흐름
@@ -128,20 +128,21 @@ model: sonnet
 ## 문서 생성 완료
 
 생성된 문서 목록:
-- docs/constitution.md
-- docs/PRD.md
-- docs/MVP-scope.md
-- docs/clarification-log.md
-- docs/user-persona.md
-- docs/problem-statement.md
-- docs/tech-stack.md
-- docs/system-architecture.md
-- docs/api-spec.md
-- docs/erd.md
-- docs/wireframe.md
-- docs/user-flow.md
-- docs/kpi.md
-- docs/operations-guide.md
+- docs/00/constitution.md
+- docs/01/PRD.md
+- docs/01/MVP-scope.md
+- docs/01/clarification-log.md
+- docs/02/user-persona.md
+- docs/02/problem-statement.md
+- docs/02/competitive-analysis.md
+- docs/03/tech-stack.md
+- docs/03/system-architecture.md
+- docs/03/api-spec.md
+- docs/03/erd.md
+- docs/04/wireframe.md
+- docs/04/user-flow.md
+- docs/05/kpi.md
+- docs/05/operations-guide.md
 
 다음 단계: 6-doc-consistency-checker agent를 호출하여 문서 간 정합성을 검토하세요.
 ```

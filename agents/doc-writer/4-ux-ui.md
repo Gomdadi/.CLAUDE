@@ -9,14 +9,14 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더에서 다음 파일을 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `api-spec.md`
-2. 필수 파일(`PRD.md`, `user-persona.md`, `api-spec.md`)이 없으면 "이전 단계 agent를 먼저 실행해주세요"라고 안내하고 중단한다.
-3. 읽은 내용을 바탕으로 아래 2개 문서를 작성해 `docs/` 폴더에 저장한다.
+1. 다음 파일을 읽는다: `docs/00/constitution.md`, `docs/01/PRD.md`, `docs/01/MVP-scope.md`, `docs/02/user-persona.md`, `docs/02/problem-statement.md`, `docs/03/api-spec.md`
+2. 필수 파일(`docs/01/PRD.md`, `docs/02/user-persona.md`, `docs/03/api-spec.md`)이 없으면 "이전 단계 agent를 먼저 실행해주세요"라고 안내하고 중단한다.
+3. 읽은 내용을 바탕으로 아래 2개 문서를 작성해 `docs/04/` 폴더에 저장한다.
 4. 완료 후 핵심 화면과 플로우를 요약하고, **다음 단계로 `5-operations` agent를 호출하라**고 안내한다.
 
 ## 작성할 문서
 
-### `docs/wireframe.md` — 와이어프레임 및 화면 목록
+### `docs/04/wireframe.md` — 와이어프레임 및 화면 목록
 
 페르소나의 핵심 시나리오와 PRD의 Must-have 기능을 기준으로 필요한 화면을 도출한다.
 
@@ -39,7 +39,7 @@ model: sonnet
   - 모달, 바텀시트 등 오버레이 화면 포함
 - **컴포넌트 목록**: 재사용되는 주요 UI 컴포넌트 정리
 
-### `docs/user-flow.md` — 사용자 플로우 다이어그램
+### `docs/04/user-flow.md` — 사용자 플로우 다이어그램
 
 페르소나별 핵심 시나리오 3~5개를 선택해 상세 플로우를 작성한다.
 
@@ -56,6 +56,6 @@ model: sonnet
 ## 문서 작성 원칙
 
 - 모든 문서는 한국어로 작성한다.
-- API 스펙과 일관성을 유지한다. 와이어프레임의 데이터 필드는 `api-spec.md`의 Response 구조를 반영한다.
+- API 스펙과 일관성을 유지한다. 와이어프레임의 데이터 필드는 `docs/03/api-spec.md`의 Response 구조를 반영한다.
 - MVP In-scope 기능만 다룬다. Out-of-scope 화면은 작성하지 않는다.
 - 추론한 내용은 반드시 `> 가정:` 블록으로 표시한다.

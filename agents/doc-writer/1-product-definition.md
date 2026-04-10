@@ -9,15 +9,15 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/constitution.md`가 존재하면 읽어 프로젝트 원칙을 파악한다. 없으면 "먼저 `0-constitution`을 실행해주세요"라고 안내하고 중단한다.
+1. `docs/00/constitution.md`가 존재하면 읽어 프로젝트 원칙을 파악한다. 없으면 "먼저 `0-constitution`을 실행해주세요"라고 안내하고 중단한다.
 2. 입력된 요구사항을 꼼꼼히 분석한다. `constitution.md`의 원칙에 맞게 작성한다.
 3. 불명확한 부분은 합리적으로 추론한다 (추론 내용은 `> 가정:` 인용 블록으로 표시).
-4. 아래 두 문서를 작성해 `docs/` 폴더에 저장한다.
+4. 아래 두 문서를 작성해 `docs/01/` 폴더에 저장한다.
 5. 완료 후 작성된 내용의 핵심을 간략히 요약하고, **다음 단계로 `1.5-clarify` agent를 호출하라**고 안내한다.
 
 ## 작성할 문서
 
-### `docs/PRD.md` — Product Requirements Document
+### `docs/01/PRD.md` — Product Requirements Document
 
 다음 내용을 포함한다:
 
@@ -29,7 +29,7 @@ model: sonnet
 - **사용자 스토리**: 주요 기능별로 `As a [유저 유형], I want to [행동], So that [목적]` 형식으로 작성
 - **비기능 요구사항**: 성능 목표, 보안 요구사항, 확장성 고려사항, 지원 플랫폼
 
-### `docs/MVP-scope.md` — MVP 범위 정의서
+### `docs/01/MVP-scope.md` — MVP 범위 정의서
 
 다음 내용을 포함한다:
 

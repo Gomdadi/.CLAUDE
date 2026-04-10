@@ -9,29 +9,29 @@ model: sonnet
 
 ## 호출 시 즉시 수행할 작업
 
-1. `docs/` 폴더의 모든 문서를 읽는다: `constitution.md`, `PRD.md`, `MVP-scope.md`, `user-persona.md`, `problem-statement.md`, `competitive-analysis.md`, `tech-stack.md`, `system-architecture.md`, `api-spec.md`, `erd.md`, `wireframe.md`, `user-flow.md`, `kpi.md`, `operations-guide.md`
-2. `docs/consistency-report.md`가 존재하면 최신 회차의 상태가 "완료"인지 확인한다. 미해결 이슈가 있으면 "먼저 `6-doc-consistency-checker`로 정합성 검증을 완료해주세요"라고 안내하고 중단한다.
-3. 아래 기준에 따라 태스크를 분해하여 `docs/task-breakdown.md`를 작성한다.
+1. 다음 파일을 읽는다: `docs/00/constitution.md`, `docs/01/PRD.md`, `docs/01/MVP-scope.md`, `docs/02/user-persona.md`, `docs/02/problem-statement.md`, `docs/02/competitive-analysis.md`, `docs/03/tech-stack.md`, `docs/03/system-architecture.md`, `docs/03/api-spec.md`, `docs/03/erd.md`, `docs/04/wireframe.md`, `docs/04/user-flow.md`, `docs/05/kpi.md`, `docs/05/operations-guide.md`
+2. `docs/06/consistency-report.md`가 존재하면 최신 회차의 상태가 "완료"인지 확인한다. 미해결 이슈가 있으면 "먼저 `6-doc-consistency-checker`로 정합성 검증을 완료해주세요"라고 안내하고 중단한다.
+3. 아래 기준에 따라 태스크를 분해하여 `docs/08/task-breakdown.md`를 작성한다.
 4. 완료 후 전체 파이프라인 최종 요약을 출력한다.
 
 ---
 
 ## 작성할 문서
 
-### `docs/task-breakdown.md` — 개발 태스크 분해서
+### `docs/08/task-breakdown.md` — 개발 태스크 분해서
 
 #### 에픽 구조
 
-`system-architecture.md`의 컴포넌트 구조와 `MVP-scope.md`의 In-scope 기능을 기준으로 에픽을 정의한다.
+`docs/03/system-architecture.md`의 컴포넌트 구조와 `docs/01/MVP-scope.md`의 In-scope 기능을 기준으로 에픽을 정의한다.
 
 ```markdown
 ## 에픽 목록
 
 | 에픽 ID | 에픽명 | 설명 | 관련 문서 |
 |---------|--------|------|-----------|
-| E1 | 프로젝트 초기 설정 | 모노레포/프로젝트 구조, Docker Compose, CI/CD | constitution.md, tech-stack.md |
-| E2 | 데이터베이스 | ERD 기반 스키마 생성, 마이그레이션, 시드 데이터 | erd.md |
-| E3 | Backend API | API 엔드포인트 구현 | api-spec.md, system-architecture.md |
+| E1 | 프로젝트 초기 설정 | 모노레포/프로젝트 구조, Docker Compose, CI/CD | docs/00/constitution.md, docs/03/tech-stack.md |
+| E2 | 데이터베이스 | ERD 기반 스키마 생성, 마이그레이션, 시드 데이터 | docs/03/erd.md |
+| E3 | Backend API | API 엔드포인트 구현 | docs/03/api-spec.md, docs/03/system-architecture.md |
 | ... | ... | ... | ... |
 ```
 
@@ -56,8 +56,8 @@ model: sonnet
 
 - **에픽**: E1. 프로젝트 초기 설정
 - **유형**: 설정
-- **설명**: tech-stack.md 기준으로 Frontend(Next.js), Backend(NestJS) 프로젝트 디렉토리를 초기화한다.
-- **참조 문서**: `tech-stack.md` 프론트엔드/백엔드 섹션
+- **설명**: docs/03/tech-stack.md 기준으로 Frontend(Next.js), Backend(NestJS) 프로젝트 디렉토리를 초기화한다.
+- **참조 문서**: `docs/03/tech-stack.md` 프론트엔드/백엔드 섹션
 - **선행 태스크**: 없음
 - **완료 기준**:
   - [ ] Next.js 14 App Router 프로젝트 생성
@@ -75,17 +75,17 @@ model: sonnet
 
 | 순서 | 에픽 범주 | 도출 문서 |
 |------|----------|-----------|
-| 1 | 프로젝트 초기 설정 | `constitution.md`, `tech-stack.md` |
-| 2 | 인프라 / Docker 환경 | `system-architecture.md`, `tech-stack.md` |
-| 3 | 데이터베이스 | `erd.md` |
-| 4 | Backend API | `api-spec.md`, `system-architecture.md` |
-| 5 | Frontend UI | `wireframe.md`, `user-flow.md`, `tech-stack.md` |
-| 6 | 핵심 비즈니스 로직 | `PRD.md` Must-have, `system-architecture.md` |
-| 7 | 실시간 기능 (SSE/WebSocket 등) | `api-spec.md`, `system-architecture.md` |
-| 8 | 테스트 | `constitution.md` 테스트 전략, `api-spec.md` |
-| 9 | 배포 / CI/CD | `constitution.md`, `tech-stack.md` |
-| 10 | 모니터링 / KPI 측정 인프라 | `kpi.md`, `operations-guide.md` |
-| 11 | 운영 환경 준비 (알림, 백업, Runbook) | `operations-guide.md` |
+| 1 | 프로젝트 초기 설정 | `docs/00/constitution.md`, `docs/03/tech-stack.md` |
+| 2 | 인프라 / Docker 환경 | `docs/03/system-architecture.md`, `docs/03/tech-stack.md` |
+| 3 | 데이터베이스 | `docs/03/erd.md` |
+| 4 | Backend API | `docs/03/api-spec.md`, `docs/03/system-architecture.md` |
+| 5 | Frontend UI | `docs/04/wireframe.md`, `docs/04/user-flow.md`, `docs/03/tech-stack.md` |
+| 6 | 핵심 비즈니스 로직 | `docs/01/PRD.md` Must-have, `docs/03/system-architecture.md` |
+| 7 | 실시간 기능 (SSE/WebSocket 등) | `docs/03/api-spec.md`, `docs/03/system-architecture.md` |
+| 8 | 테스트 | `docs/00/constitution.md` 테스트 전략, `docs/03/api-spec.md` |
+| 9 | 배포 / CI/CD | `docs/00/constitution.md`, `docs/03/tech-stack.md` |
+| 10 | 모니터링 / KPI 측정 인프라 | `docs/05/kpi.md`, `docs/05/operations-guide.md` |
+| 11 | 운영 환경 준비 (알림, 백업, Runbook) | `docs/05/operations-guide.md` |
 
 ---
 
@@ -103,7 +103,7 @@ model: sonnet
 
 ## 우선순위 및 마일스톤
 
-`MVP-scope.md`의 출시 전제 조건(P1, P2, ...)과 `kpi.md`의 타임라인을 기준으로 마일스톤을 정의한다:
+`docs/01/MVP-scope.md`의 출시 전제 조건(P1, P2, ...)과 `docs/05/kpi.md`의 타임라인을 기준으로 마일스톤을 정의한다:
 
 ```markdown
 ## 마일스톤
@@ -122,7 +122,7 @@ model: sonnet
 
 ### M4 — 출시 준비 (Week 7~8)
 - E9, E10 완료
-- MVP-scope.md 출시 전제 조건 P1~P7 충족 확인
+- docs/01/MVP-scope.md 출시 전제 조건 P1~P7 충족 확인
 ```
 
 ---
@@ -133,23 +133,23 @@ model: sonnet
 ## 문서 작성 파이프라인 완료
 
 전체 생성 문서:
-- docs/constitution.md (0단계)
-- docs/PRD.md (1단계)
-- docs/MVP-scope.md (1단계)
-- docs/clarification-log.md (1.5단계)
-- docs/user-persona.md (2단계)
-- docs/problem-statement.md (2단계)
-- docs/competitive-analysis.md (2단계)
-- docs/tech-stack.md (3단계)
-- docs/system-architecture.md (3단계)
-- docs/api-spec.md (3단계)
-- docs/erd.md (3단계)
-- docs/wireframe.md (4단계)
-- docs/user-flow.md (4단계)
-- docs/kpi.md (5단계)
-- docs/operations-guide.md (5단계)
-- docs/consistency-report.md (6단계)
-- docs/task-breakdown.md (8단계)
+- docs/00/constitution.md (0단계)
+- docs/01/PRD.md (1단계)
+- docs/01/MVP-scope.md (1단계)
+- docs/01/clarification-log.md (1.5단계)
+- docs/02/user-persona.md (2단계)
+- docs/02/problem-statement.md (2단계)
+- docs/02/competitive-analysis.md (2단계)
+- docs/03/tech-stack.md (3단계)
+- docs/03/system-architecture.md (3단계)
+- docs/03/api-spec.md (3단계)
+- docs/03/erd.md (3단계)
+- docs/04/wireframe.md (4단계)
+- docs/04/user-flow.md (4단계)
+- docs/05/kpi.md (5단계)
+- docs/05/operations-guide.md (5단계)
+- docs/06/consistency-report.md (6단계)
+- docs/08/task-breakdown.md (8단계)
 
 파이프라인 완료. 이제 task-breakdown.md를 기반으로 개발을 시작할 수 있습니다.
 ```
