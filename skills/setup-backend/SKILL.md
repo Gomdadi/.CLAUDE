@@ -3,7 +3,7 @@ name: setup-backend
 description: docs/tech-stack.md의 백엔드/데이터베이스/인프라 섹션을 읽어 백엔드 개발 환경을 세팅한다. 백엔드 프로젝트 초기 세팅, 의존성 설치, 설정 파일 생성이 필요할 때 사용한다.
 ---
 
-`./docs/tech-stack.md`의 백엔드/데이터베이스/인프라 섹션을 읽어 **백엔드** 개발 환경을 세팅한다.
+`./docs/03/tech-stack.md`의 백엔드/데이터베이스/인프라 섹션을 읽어 **백엔드** 개발 환경을 세팅한다.
 
 ## 수행할 작업
 
@@ -16,7 +16,12 @@ description: docs/tech-stack.md의 백엔드/데이터베이스/인프라 섹션
    - Git 사용을 전제로 .gitignore 생성
    - `.claudeignore` 생성: 빌드 결과물(dist/, build/), 의존성(node_modules/, .venv/, __pycache__/), 민감한 파일(*.env, *.pem, secrets/), 대용량 파일(*.log), IDE 설정(.idea/) 제외
    - Docker를 포함하면 Dockerfile, docker-compose.yml, .dockerignore 생성
-   - `src/main.ts`, `src/app.module.ts` 진입점 파일 생성
+   - 언어/프레임워크에 따라 아래 진입점 파일 생성:
+     - **TypeScript (NestJS)**: `src/main.ts`, `src/app.module.ts`
+     - **Java (Spring Boot)**: `src/main/java/<패키지경로>/Application.java` (`@SpringBootApplication` 포함), `src/main/resources/application.yml`
+     - **Python (FastAPI)**: `src/main.py` (FastAPI 앱 인스턴스 및 루트 라우터 포함), `src/api/__init__.py`
+     - **Python (Django)**: `manage.py`, `<프로젝트명>/settings.py`, `<프로젝트명>/urls.py`, `<프로젝트명>/wsgi.py`
+     - **Python (Flask)**: `src/app.py` (Flask 앱 팩토리 패턴 포함), `src/__init__.py`
 
 3. **의존성 설치**: 백엔드 스택에 필요한 패키지를 설치한다.
 
