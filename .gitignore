@@ -11,4 +11,6 @@
 !commands/
 !commands/**
 !settings.json
+!plans/
+!plans/**
 !.gitignore
